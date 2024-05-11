@@ -1,9 +1,12 @@
 
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFrameworks>net7.0;net472</TargetFrameworks>
+        <LangVersion>7.3</LangVersion>
+        <RootNamespace>OpenFoodFacts.CSharp.Tests</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
+        <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -13,5 +16,14 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\OpenFoodFacts-CSharp\OpenFoodFacts-CSharp.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <Reference Include="System.Net" Condition="'$(TargetFramework)' == 'net472'">
+        <HintPath>..\..\..\.nuget\packages\microsoft.netframework.referenceassemblies.net472\1.0.3\build\.NETFramework\v4.7.2\System.Net.dll</HintPath>
+      </Reference>
+      <Reference Include="System.Net.Http" Condition="'$(TargetFramework)' == 'net472'">
+        <HintPath>..\..\..\.nuget\packages\microsoft.netframework.referenceassemblies.net472\1.0.3\build\.NETFramework\v4.7.2\System.Net.Http.dll</HintPath>
+      </Reference>
+      <Reference Include="System.Net.Http.WebRequest" Condition="'$(TargetFramework)' == 'net472'" />
     </ItemGroup>
 </Project>

@@ -2,9 +2,27 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
       <OutputType>Library</OutputType>
-      <TargetFramework>netstandard2.0</TargetFramework>
+      <TargetFrameworks>net7.0;net472</TargetFrameworks>
+      <NeutralLanguage>en-001</NeutralLanguage>
+      <RootNamespace>OpenFoodFactsCSharp</RootNamespace>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DocumentationFile>bin\Debug\netstandard2.0\OpenFoodFacts-CSharp.xml</DocumentationFile>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DocumentationFile>bin\Release\netstandard2.0\OpenFoodFacts-CSharp.xml</DocumentationFile>
     </PropertyGroup>
     <ItemGroup>
+      <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+    <ItemGroup>
+      <Reference Include="System.Net" Condition="'$(TargetFramework)' == 'net472'">
+        <HintPath>..\..\..\.nuget\packages\microsoft.netframework.referenceassemblies.net472\1.0.3\build\.NETFramework\v4.7.2\System.Net.dll</HintPath>
+      </Reference>
+      <Reference Include="System.Net.Http" Condition="'$(TargetFramework)' == 'net472'">
+        <HintPath>..\..\..\.nuget\packages\microsoft.netframework.referenceassemblies.net472\1.0.3\build\.NETFramework\v4.7.2\System.Net.Http.dll</HintPath>
+      </Reference>
+      <Reference Include="System.Net.Http.WebRequest" Condition="'$(TargetFramework)' == 'net472'" />
     </ItemGroup>
 </Project>
