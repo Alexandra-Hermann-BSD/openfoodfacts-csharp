@@ -1,5 +1,7 @@
 
 using System;
+using System.Runtime.Serialization;
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 using OpenFoodFactsCSharp.Attributes;
 using OpenFoodFactsCSharp.EventArguments;
@@ -21,6 +23,22 @@ namespace OpenFoodFactsCSharp.Models
         private string _manufacturer;
         private string _name;
         private string _url;
+
+        /// <summary>
+        /// Constructor for deserialization.
+        /// </summary>
+        /// <param name="info">The serialization info</param>
+        /// <param name="context">A streaming context</param>
+        protected Source([NotNull]SerializationInfo info, StreamingContext context)
+        {
+            _fields = info.GetValue(nameof(_fields), typeof(string[])) as string[];
+            _id = info.GetString(nameof(_id));
+            _images = info.GetValue(nameof(_images), typeof(string[])) as string[];
+            _importT = info.GetValue(nameof(_importT), typeof(long?)) as long?;
+            _manufacturer = info.GetString(nameof(_manufacturer));
+            _name = info.GetString(nameof(_name));
+            _url = info.GetString(nameof(_url));
+        }
 
         /// <summary>
         /// Default constructor.
@@ -191,6 +209,18 @@ namespace OpenFoodFactsCSharp.Models
                     UrlChanged?.Invoke(this, changeEventArgs);
                 }
             }
+        }
+
+        /// <inheritdoc />
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue(nameof(_fields), _fields);
+            info.AddValue(nameof(_id), _id);
+            info.AddValue(nameof(_images), _images);
+            info.AddValue(nameof(_importT), _importT);
+            info.AddValue(nameof(_manufacturer), _manufacturer);
+            info.AddValue(nameof(_name), _name);
+            info.AddValue(nameof(_url), _url);
         }
     }
 }

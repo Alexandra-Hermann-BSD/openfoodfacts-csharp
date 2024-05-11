@@ -1,32 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace OpenFoodFactsCSharp.Interfaces
 {
     /// <summary>
-    /// Interface for an image dictionary.
+    /// Interface for a dictionary of images
     /// </summary>
-    public interface IImages : IDictionary<string, object>
-    {
-        /// <summary>
-        /// Adds an array of keys.
-        /// </summary>
-        /// <param name="keys">The array of keys</param>
-        void Add(string[] keys);
-
-        /// <summary>
-        /// Adds a collection of keys.
-        /// </summary>
-        /// <param name="keys">The collection of keys</param>
-        void Add(ICollection<string> keys);
-
-        /// <summary>
-        /// Adds a key without a value.
-        /// </summary>
-        /// <param name="key">The Key to add</param>
-        /// <remarks>If <paramref name="key"/> already exists in <see cref="IDictionary{TKey,TValue}.Keys"/>, nothing will happen</remarks>
-        void Add(string key);
-    }
+    public interface IImages : ISerializable, IHasOtherValues<object> { }
 }
